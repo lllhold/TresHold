@@ -14,18 +14,15 @@
         <h1>Contacto</h1>
         <p>Actividad: obras generativas y cuadros de edición limitada.</p>
         <p>Escríbeme para consultar disponibilidad, precio, acabados, transporte y condiciones de compra.</p>
-
-        <!-- Sustituye PEGA_AQUI_LA_URL_DE_TU_GOOGLE_APPS_SCRIPT por la URL de tu aplicación web. -->
-        <form id="contactForm" class="contact-form" action="https://script.google.com/macros/s/AKfycbwqFTvTvK9FcGHPM3qvFMMCvGWU3k_ahaoIUS83m6mCzEextY9ewUxDx4BlgPZb81n7xg/exec" method="POST" target="contactResponseFrame">
-            <div class="contact-form-field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" required minlength="2" aria-describedby="nombre-ayuda" title="Escribe tu nombre (mínimo 2 caracteres)."><small id="nombre-ayuda">Indica tu nombre para poder dirigirnos a ti.</small></div>
-            <div class="contact-form-field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-ayuda" title="Introduce un correo electrónico válido."><small id="email-ayuda">Usaremos este correo para responderte.</small></div>
-            <div class="contact-form-field"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" autocomplete="tel" required pattern="[+]?[0-9 ()-]{9,}" aria-describedby="telefono-ayuda" title="Introduce un teléfono válido, con al menos 9 dígitos."><small id="telefono-ayuda">Incluye el prefijo internacional si procede.</small></div>
-            <div class="contact-form-field"><label for="obra">Obra que te interesa</label><input id="obra" name="obra" type="text" required minlength="2" aria-describedby="obra-ayuda" title="Indica la obra que te interesa."><small id="obra-ayuda">Por ejemplo: Threshold 01.</small></div>
-            <div class="contact-form-field contact-form-field-full"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" rows="6" required minlength="10" aria-describedby="mensaje-ayuda" title="Escribe tu consulta (mínimo 10 caracteres)."></textarea><small id="mensaje-ayuda">Cuéntame qué necesitas consultar.</small></div>
-            <button class="btn btn-primary contact-form-submit" type="submit">Enviar consulta</button>
-            <p id="contactFormStatus" class="contact-form-status" role="status" aria-live="polite"></p>
+        <form id="contactForm" method="POST" target="contactResponseFrame" action="https://script.google.com/macros/s/AKfycbwqFTvTvK9FcGHPM3qvFMMCvGWU3k_ahaoIUS83m6mCzEextY9ewUxDx4BlgPZb81n7xg/exec">
+            <div class="contact-form-field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" required minlength="2" title="Escribe tu nombre (mínimo 2 caracteres)."><small>Indica tu nombre para poder dirigirnos a ti.</small></div>
+            <div class="contact-form-field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required title="Introduce un correo electrónico válido."><small>Usaremos este correo para responderte.</small></div>
+            <div class="contact-form-field"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" autocomplete="tel" required pattern="[+]?[0-9 ()-]{9,}" title="Introduce un teléfono válido, con al menos 9 dígitos."><small>Incluye el prefijo internacional si procede.</small></div>
+            <div class="contact-form-field"><label for="obra">Obra que te interesa</label><input id="obra" name="obra" type="text" required minlength="2" title="Indica la obra que te interesa."><small>Por ejemplo: Threshold 01.</small></div>
+            <div class="contact-form-field contact-form-field-full"><label for="mensaje">Mensaje</label><textarea name="mensaje" id="mensaje" rows="6" required minlength="10"></textarea></div>
+            <button class="btn btn-primary contact-form-submit" type="submit">ENVIAR CONSULTA</button>
         </form>
-        <iframe id="contactResponseFrame" name="contactResponseFrame" title="Respuesta del formulario" class="contact-response-frame" aria-hidden="true"></iframe>
+        <iframe name="contactResponseFrame" id="contactResponseFrame" hidden></iframe>
         <a class="legal-back" href="index.html">← Volver a la colección</a>
     </main>
     <footer class="legal-footer"><a href="legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="compra.html">Compra</a><a href="envios.html">Envíos</a><a href="devoluciones.html">Devoluciones</a><a href="fiscal.html">Información fiscal</a></footer>
