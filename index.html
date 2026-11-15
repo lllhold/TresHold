@@ -20,5 +20,10 @@
     </main>
     <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5"><p class="brand-footer">ThreSH (h)old</p><p>Generative picture</p><p>© 2026 ThreSH (h)old</p><nav class="footer-links"><a href="legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="compra.html">Condiciones de compra</a><a href="envios.html">Envíos</a><a href="devoluciones.html">Devoluciones</a><a href="fiscal.html">Información fiscal</a><a href="contacto.html">Contacto</a></nav><p class="pending-note">Aviso legal, privacidad, condiciones y devoluciones: Pendiente de completar.</p></div></footer>
     <script src="js/scripts.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
+            link.href = 'contacto.html';
+        });
+    </script>
 </body>
 </html>
