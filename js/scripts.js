@@ -26,4 +26,32 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    const contactForm = document.querySelector('#contactForm');
+    const contactSubmit = document.querySelector('#contactSubmit');
+    if (contactForm && contactSubmit) {
+        contactSubmit.addEventListener('click', function () {
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            const datos = new FormData(contactForm);
+            const cuerpo = [
+                'Nombre: ' + datos.get('nombre'),
+                'Email: ' + datos.get('email'),
+                'Obra: ' + datos.get('obra'),
+                '',
+                'Mensaje:',
+                datos.get('mensaje')
+            ].join('\n');
+
+            const mailto = 'mailto:javier.aldave@gmail.com'
+                + '?subject=' + encodeURIComponent('Nueva consulta desde la web')
+                + '&body=' + encodeURIComponent(cuerpo);
+
+            window.location.href = mailto;
+            contactForm.reset();
+        });
+    }
 });
