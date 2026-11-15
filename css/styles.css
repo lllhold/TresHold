@@ -1,15 +1,6 @@
 @charset "UTF-8";
-/*!
-* Start Bootstrap - Grayscale v7.0.6 (https://startbootstrap.com/theme/grayscale)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
-*/
-/*!
- * Bootstrap  v5.2.3 (https://getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+/* Base styles */
+/* Layout and component styles */
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -11089,6 +11080,14 @@ body {
   max-width: 20rem;
   font-size: 1rem;
 }
+.masthead p {
+  max-width: 52rem;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+  line-height: 1.65;
+  letter-spacing: 0.08em;
+}
 @media (min-width: 768px) {
   .masthead h1, .masthead .h1 {
     font-size: 4rem;
@@ -11200,4 +11199,40 @@ body {
 
 .footer {
   padding: 5rem 0;
+}
+
+/* ThreSH (h)old shop overrides */
+.eyebrow { letter-spacing: .22em; text-transform: uppercase; font-size: .72rem; font-weight: 700; }
+.hero-copy { max-width: 68rem; }
+.hero-copy h1 { letter-spacing: .28em; }
+.hero-copy h2 { max-width: none; letter-spacing: .08em; }
+.hero-copy p { max-width: 48rem; }
+.btn-outline-light { color: #fff; border: 1px solid rgba(255,255,255,.65); }
+.collection-facts { color: rgba(255,255,255,.75); }
+.collection-facts > div { display: flex; flex-direction: column; gap: .35rem; padding: 1.25rem; border: 1px solid rgba(255,255,255,.18); }
+.collection-facts span { color: #fff; }
+.section-heading { margin-bottom: 3rem; }
+.section-heading h2, .info-section h2 { letter-spacing: .08em; }
+.artwork-card { background: #fff; box-shadow: 0 1rem 3rem rgba(0,0,0,.08); }
+.artwork-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.artwork-info { padding: 2rem; }
+.artwork-info h3 { letter-spacing: .08em; }
+.artwork-info dl { display: grid; grid-template-columns: 1fr 1fr; margin: 1.5rem 0; border-top: 1px solid #dee2e6; }
+.artwork-info dt, .artwork-info dd { padding: .65rem 0; margin: 0; border-bottom: 1px solid #dee2e6; }
+.artwork-info dd { text-align: right; }
+.artwork-price { display: block; margin-bottom: 1rem; font-size: 1.25rem; }
+.process-section, .info-section { padding: 8rem 0; }
+.process-step { padding: 2rem; border-top: 4px solid #64a19d; }
+.process-step > span { color: #64a19d; font-size: 1.5rem; font-weight: 700; }
+.feature-list { padding-left: 1.2rem; }
+.feature-list li { margin-bottom: .75rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
+.footer-links a { color: rgba(255,255,255,.6); }
+.brand-footer { color: #fff; font-size: 1.1rem; letter-spacing: .12em; }
+.pending-note { font-size: .75rem; color: rgba(255,255,255,.4); }
+@media (max-width: 767.98px) {
+  .hero-copy h1 { letter-spacing: .12em; }
+  .hero-copy h2 { font-size: 1rem; }
+  .hero-copy .btn { margin: .35rem 0; width: 100%; }
+  .process-section, .info-section { padding: 5rem 0; }
 }
