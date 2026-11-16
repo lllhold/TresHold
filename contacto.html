@@ -19,7 +19,8 @@
             <div class="contact-form-field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required title="Introduce un correo electrónico válido."><small>Usaremos este correo para responderte.</small></div>
             <div class="contact-form-field"><label for="obra">Obra que te interesa</label><input id="obra" name="obra" type="text" required minlength="2" title="Indica la obra que te interesa."><small>Por ejemplo: Threshold 01.</small></div>
             <div class="contact-form-field contact-form-field-full"><label for="mensaje">Mensaje</label><textarea name="mensaje" id="mensaje" rows="6" required minlength="10" title="Escribe tu consulta (mínimo 10 caracteres)."></textarea></div>
-            <button class="btn btn-primary contact-form-submit" id="contactSubmit" type="button">ENVIAR CONSULTA</button>
+            <p class="contact-form-status" id="contactStatus" aria-live="polite"></p>
+            <button class="btn btn-primary contact-form-submit" id="contactSubmit" type="submit">ENVIAR CONSULTA</button>
         </form>
         <a class="legal-back" href="index.html">← Volver a la colección</a>
     </main>
