@@ -1,10 +1,20 @@
-// Scripts
+// Scripts - Navegación y formulario de contacto
 
 window.addEventListener('DOMContentLoaded', function () {
+
+    // ==========================================
+    // 1. MENÚ DE NAVEGACIÓN
+    // ==========================================
+
     const navbarCollapsible = document.body.querySelector('#mainNav');
+
     const navbarShrink = function () {
         if (!navbarCollapsible) return;
-        navbarCollapsible.classList.toggle('navbar-shrink', window.scrollY !== 0);
+
+        navbarCollapsible.classList.toggle(
+            'navbar-shrink',
+            window.scrollY !== 0
+        );
     };
 
     navbarShrink();
@@ -12,46 +22,139 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const navbarToggler = document.body.querySelector('.navbar-toggler');
     const navbarResponsive = document.body.querySelector('#navbarResponsive');
-    if (!navbarToggler || !navbarResponsive) return;
 
-    navbarToggler.addEventListener('click', function () {
-        const isOpen = navbarResponsive.classList.toggle('show');
-        navbarToggler.setAttribute('aria-expanded', String(isOpen));
-    });
+    if (navbarToggler && navbarResponsive) {
 
-    document.querySelectorAll('#navbarResponsive .nav-link').forEach(function (item) {
-        item.addEventListener('click', function () {
-            if (window.getComputedStyle(navbarToggler).display !== 'none' && navbarResponsive.classList.contains('show')) {
-                navbarToggler.click();
-            }
+        navbarToggler.addEventListener('click', function () {
+            const isOpen = navbarResponsive.classList.toggle('show');
+
+            navbarToggler.setAttribute(
+                'aria-expanded',
+                String(isOpen)
+            );
         });
-    });
+
+        document.querySelectorAll('#navbarResponsive .nav-link')
+            .forEach(function (item) {
+
+                item.addEventListener('click', function () {
+
+                    if (
+                        window.getComputedStyle(navbarToggler).display !== 'none' &&
+                        navbarResponsive.classList.contains('show')
+                    ) {
+                        navbarToggler.click();
+                    }
+
+                });
+
+            });
+    }
+
+    // ==========================================
+    // 2. FORMULARIO DE CONTACTO
+    // ==========================================
+
+    const SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
 
     const contactForm = document.querySelector('#contactForm');
     const contactSubmit = document.querySelector('#contactSubmit');
-    if (contactForm && contactSubmit) {
-        contactSubmit.addEventListener('click', function () {
-            if (!contactForm.checkValidity()) {
-                contactForm.reportValidity();
-                return;
-            }
+
+    if (!contactForm) return;
+
+    // Evitar envíos duplicados
+    let enviando = false;
+
+    // Mensaje de estado
+    const estado = document.createElement('div');
+
+    estado.id = 'contactStatus';
+    estado.setAttribute('role', 'status');
+    estado.setAttribute('aria-live', 'polite');
+    estado.style.marginTop = '15px';
+
+    contactForm.appendChild(estado);
+
+    // Evitar que el botón envíe dos veces
+    if (contactSubmit) {
+        contactSubmit.setAttribute('type', 'submit');
+    }
+
+    contactForm.addEventListener('submit', async function (event) {
+
+        event.preventDefault();
+
+        if (enviando) return;
+
+        // Validar formulario
+        if (!contactForm.checkValidity()) {
+            contactForm.reportValidity();
+            return;
+        }
+
+        // Comprobar configuración
+        if (SCRIPT_URL.includes('PEGA_AQUI')) {
+            estado.textContent = 'Error: falta configurar Google Apps Script.';
+            estado.style.color = 'red';
+            return;
+        }
+
+        enviando = true;
+
+        const textoOriginal = contactSubmit
+            ? contactSubmit.textContent
+            : '';
+
+        if (contactSubmit) {
+            contactSubmit.disabled = true;
+            contactSubmit.textContent = 'Enviando...';
+        }
+
+        estado.textContent = 'Enviando mensaje...';
+        estado.style.color = '#555';
+
+        try {
 
             const datos = new FormData(contactForm);
-            const cuerpo = [
-                'Nombre: ' + datos.get('nombre'),
-                'Email: ' + datos.get('email'),
-                'Obra: ' + datos.get('obra'),
-                '',
-                'Mensaje:',
-                datos.get('mensaje')
-            ].join('\n');
 
-            const mailto = 'mailto:javier.aldave@gmail.com'
-                + '?subject=' + encodeURIComponent('Nueva consulta desde la web')
-                + '&body=' + encodeURIComponent(cuerpo);
+            // Enviar los datos al servidor
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: datos
+            });
 
-            window.location.href = mailto;
-            contactForm.reset();
-        });
-    }
+            // IMPORTANTE:
+            // no-cors no permite comprobar la respuesta del servidor.
+            // Llegar aquí NO confirma que Gmail haya enviado el mensaje.
+
+            estado.textContent =
+                'Solicitud enviada. No se ha podido confirmar la entrega del correo.';
+
+            estado.style.color = '#856404';
+
+            // No borrar los datos hasta confirmar la entrega.
+
+        } catch (error) {
+
+            console.error('Error de conexión:', error);
+
+            estado.textContent =
+                'No se pudo completar la solicitud. Inténtalo de nuevo.';
+
+            estado.style.color = 'red';
+
+        } finally {
+
+            enviando = false;
+
+            if (contactSubmit) {
+                contactSubmit.disabled = false;
+                contactSubmit.textContent = textoOriginal;
+            }
+
+        }
+
+    });
+
 });
