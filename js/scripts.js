@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // 2. FORMULARIO DE CONTACTO
     // ==========================================
 
-    const SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyK-XpvcSEXEf1csb-j6cgaWtRJn0tXP9ZUgIppwzm2Hp9tDRSppV5vj8EO3f2OFlv-Qw/exec';
 
     const contactForm = document.querySelector('#contactForm');
     const contactSubmit = document.querySelector('#contactSubmit');
