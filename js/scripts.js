@@ -49,22 +49,20 @@ window.addEventListener('DOMContentLoaded', function () {
             contactStatus.textContent = 'Enviando consulta…';
 
             try {
-                const response = await fetch(appsScriptUrl, {
+                // Apps Script no expone una respuesta CORS utilizable desde GitHub Pages.
+                // La petición se envía, pero su resultado no permite confirmar la entrega.
+                await fetch(appsScriptUrl, {
                     method: 'POST',
-                    body: new FormData(contactForm)
+                    body: new FormData(contactForm),
+                    mode: 'no-cors'
                 });
 
-                if (!response.ok) {
-                    throw new Error('El servidor respondió con un error.');
-                }
-
-                contactStatus.className = 'contact-form-status is-success';
-                contactStatus.textContent = 'Consulta enviada correctamente.';
-                contactForm.reset();
+                contactStatus.className = 'contact-form-status is-error';
+                contactStatus.textContent = 'La consulta se ha enviado, pero no se puede verificar la entrega desde esta página. Conservamos los datos por seguridad.';
             } catch (error) {
                 console.error('No se pudo enviar la consulta:', error);
                 contactStatus.className = 'contact-form-status is-error';
-                contactStatus.textContent = 'No se pudo confirmar el envío. Revisa tu conexión e inténtalo de nuevo.';
+                contactStatus.textContent = 'No se pudo completar la solicitud. Revisa tu conexión e inténtalo de nuevo.';
             } finally {
                 contactSending = false;
                 contactSubmit.disabled = false;
