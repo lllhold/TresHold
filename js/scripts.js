@@ -30,6 +30,12 @@ window.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.querySelector('#contactForm');
     const contactSubmit = document.querySelector('#contactSubmit');
     const contactStatus = document.querySelector('#contactStatus');
+    const contactHoneypot = document.querySelector('#website');
+    const contactLimits = { nombre: 100, email: 254, obra: 150, mensaje: 5000 };
+    Object.keys(contactLimits).forEach(function (fieldName) {
+        const field = contactForm && contactForm.elements[fieldName];
+        if (field) field.maxLength = contactLimits[fieldName];
+    });
     const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbyK-XpvcSEXEf1csb-j6cgaWtRJn0tXP9ZUgIppwzm2Hp9tDRSppV5vj8EO3f2OFlv-Qw/exec';
     let contactSending = false;
 
@@ -40,6 +46,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
             if (!contactForm.checkValidity()) {
                 contactForm.reportValidity();
+                return;
+            }
+
+            if (contactHoneypot && contactHoneypot.value.trim() !== '') {
+                contactStatus.className = 'contact-form-status is-error';
+                contactStatus.textContent = 'No se ha podido procesar la consulta.';
                 return;
             }
 
